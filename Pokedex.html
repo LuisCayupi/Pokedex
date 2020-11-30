@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="Pokedex" content="Pokedex">
+    <title>Pokedex</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            for (var i = 1; i <= 151; i++) {
+                var a = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/" + i + ".png";
+                $("#pokemon").append("<img id=" + i + " src=" + a + ">");
+            }
+            $("img").click(function() {
+                var b = $(this).attr("id");
+                $.get(" https://pokeapi.co/api/v2/pokemon/" + b + "/", function(inf) {
+                    $("#imagen").html("<img src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/" + b + ".png'>");
+                    $("#name").html("<h2>" + inf.name + "<h2>");
+                    $("#type").html("<h4>Type</h4><p>" + inf.types[0].type.name + "</p>");
+                    $("#heigth").html("<h4>Heigth</h4><p>" + inf.height + "</p>");
+                    $("#with").html("<h4>With</h4><p>" + inf.weight + "</p>");
+                }, 'json');
+            });
+        });
+    </script>
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+        }
+        
+        #conteiner {
+            background-color: silver;
+            height: 100%;
+            padding: 20px 40px;
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        
+        #pokemon {
+            display: inline-block;
+            width: 70%;
+            vertical-align: top;
+        }
+        
+        #info {
+            text-align: justify;
+            padding: 30px;
+            width: 25%;
+            height: 360px;
+            background-color: white;
+            display: inline-block;
+            box-sizing: border-box;
+            border: red 3px solid;
+        }
+        
+        h2 {
+            text-align: center;
+        }
+        
+        #imagen {
+            text-align: center;
+        }
+        
+        h4 {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        
+        img {
+            width: 100px;
+            height: 100px;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="conteiner">
+        <h1>POKEDEX</h1>
+        <div id="pokemon"></div>
+        <div id="info">
+            <h2 id="name"> </h2>
+            <div id="imagen"></div>
+            <p id="type"></p>
+            <p id="heigth"></p>
+            <p id="with"></p>
+        </div>
+    </div>
+</body>
+
+</html>
